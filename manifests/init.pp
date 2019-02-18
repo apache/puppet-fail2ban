@@ -8,11 +8,6 @@
 # Standard class parameters
 # Define the general class behaviour and customizations
 #
-# [*my_class*]
-#   Name of a custom class to autoload to manage module's customizations
-#   If defined, fail2ban class will automatically "include $my_class"
-#   Can be defined also by the (top scope) variable $fail2ban_myclass
-#
 # [*source*]
 #   Sets the content of source parameter for main configuration file
 #   (fail2ban.local)
@@ -282,7 +277,6 @@
 #   Javier Bertoli <javier@netmanagers.com.ar/>
 #
 class fail2ban (
-  $my_class              = params_lookup( 'my_class' ),
   $source                = params_lookup( 'source' ),
   $source_dir            = params_lookup( 'source_dir' ),
   $source_dir_purge      = params_lookup( 'source_dir_purge' ),
@@ -514,12 +508,6 @@ class fail2ban (
       audit   => $fail2ban::manage_audit,
       noop    => $fail2ban::noops,
     }
-  }
-
-
-  ### Include custom class if $my_class is set
-  if $fail2ban::my_class {
-    include $fail2ban::my_class
   }
 
 
