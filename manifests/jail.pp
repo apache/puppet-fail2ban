@@ -39,7 +39,6 @@ define fail2ban::jail (
   $maxretry  = '',
   $bantime   = '',
   $findtime  = '',
-  $ensure_monitor = '',
   $enable    = true ) {
 
   include fail2ban
