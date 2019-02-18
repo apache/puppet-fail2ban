@@ -39,6 +39,7 @@ define fail2ban::jail (
   $maxretry  = '',
   $bantime   = '',
   $findtime  = '',
+  $ensure_monitor = '',
   $enable    = true ) {
 
   include fail2ban
@@ -113,7 +114,7 @@ define fail2ban::jail (
     default => $bantime,
   }
 
-  $ensure = bool2ensure($enable)
+  $ensure_monitor = bool2ensure($enable)
 
 
   if ! defined(Concat[$fail2ban::jails_file]) {
@@ -143,7 +144,7 @@ define fail2ban::jail (
     }
   }
   concat::fragment{ "fail2ban_jail_${name}":
-    ensure  => $ensure,
+    ensure  => $ensure_monitor,
     target  => $fail2ban::jails_file,
     content => template('fail2ban/concat/jail.local-stanza.erb'),
     order   => $real_order,
