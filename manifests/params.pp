@@ -149,6 +149,6 @@ class fail2ban::params {
   $puppi_helper = 'standard'
   $debug = false
   $audit_only = false
-  $noops = undef
+  $noops = false
 
 }
